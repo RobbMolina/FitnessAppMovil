@@ -1,0 +1,59 @@
+<resources>
+    <string name="app_name">ProyectoMobil</string>
+    <string name="profile">Perfil</string>
+    <string name="load_exercises">Cargar ejercicios</string>
+    <string name="muscle_group">Grupo muscular: %1$s</string>
+    <string name="equipment">Equipo: %1$s</string>
+    <string name="exit">Salir</string>
+    <string name="calculator">Calculadora de macros</string>
+    <string name="home">Inicio</string>
+    <string name="diet">Dieta</string>
+    <string name="workout">Rutina</string>
+    <string name="welcome_back">¡Bienvenido de vuelta, %1$s!</string>
+    <string name="notifications">Notificaciones</string>
+    <string name="enter_personal_info">Ingresa tu información personal</string>
+    <string name="age_placeholder">Edad</string>
+    <string name="height_placeholder">Altura</string>
+    <string name="weight_placeholder">Peso</string>
+    <string name="activity_level">Nivel de actividad física</string>
+    <string name="goal">Objetivo</string>
+    <string name="lose_fat">Perder grasa</string>
+    <string name="gain_mass">Aumentar masa</string>
+    <string name="calculate_save">Calcular y guardar</string>
+    <string name="register_food">Registrar comida</string>
+    <string name="profile_text">Perfil</string>
+    <string name="notifications_text">Notificaciones</string>
+    <string name="exit_text">Salir</string>
+    <string name="login_button">Inicia sesión</string>
+    <string name="no_account">¿No tienes sesión? Crea tu cuenta aquí.</string>
+    <string name="login_error_message">Por favor, ingrese su correo y contraseña</string>
+    <string name="email_placeholder">Correo electrónico</string>
+    <string name="password_placeholder">Contraseña</string>
+
+    <!-- Nuevas cadenas agregadas -->
+    <string name="protein">Proteína</string>
+    <string name="carbs">Carbs</string>
+    <string name="fats">Grasas</string>
+    <string name="kcal_progress">Calorías</string>
+
+    <!-- Cadenas faltantes para botones -->
+    <string name="go_to_workout">Ir al entrenamiento</string>
+    <string name="view_diet_plan">Ver plan alimenticio</string>
+    <string name="exit_button">Salir</string>
+    <string name="profile_background">Fondo de perfil</string>
+    <string name="motivation">Recuerda que no tiene nada de malo fallar un día! Lo importante es mantenerse constante.</string>
+    <string name="age">Edad</string>
+    <string name="height">Altura</string>
+    <string name="weight">Peso</string>
+    <string name="member">Miembro</string>
+    <string name="low">Bajo</string>
+    <string name="moderate">Moderado</string>
+    <string name="high">Alto</string>
+
+    <string name="add_food">Agregar comida</string>
+
+
+
+
+
+</resources>

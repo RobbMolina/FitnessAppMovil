@@ -1,0 +1,63 @@
+<resources>
+    <string name="app_name">My App</string>
+    <string name="profile">Profile</string>
+    <string name="load_exercises">Load Exercises</string>
+    <string name="muscle_group">Muscle group: %1$s</string>
+    <string name="equipment">Equipment: %1$s</string>
+    <string name="exit">Exit</string>
+    <string name="calculator">Macro Calculator</string>
+    <string name="home">Home</string>
+    <string name="diet">Diet</string>
+    <string name="workout">Workout</string>
+    <string name="welcome_back">Welcome back, %1$s!</string>
+    <string name="notifications">Notifications</string>
+    <string name="enter_personal_info">Enter your personal information</string>
+    <string name="age_placeholder">Age</string>
+    <string name="height_placeholder">Height</string>
+    <string name="weight_placeholder">Weight</string>
+    <string name="activity_level">Activity Level</string>
+    <string name="goal">Goal</string>
+    <string name="lose_fat">Lose Fat</string>
+    <string name="gain_mass">Gain Mass</string>
+    <string name="calculate_save">Calculate and Save</string>
+    <string name="register_food">Register Food</string>
+    <string name="profile_text">Profile</string>
+    <string name="notifications_text">Notifications</string>
+    <string name="exit_text">Exit</string>
+    <string name="login_button">Log in</string>
+    <string name="no_account">Dont have an account? Create one here.</string>
+    <string name="login_error_message">Please enter your email and password</string>
+    <string name="email_placeholder">Email</string>
+    <string name="password_placeholder">Password</string>
+
+    <!-- Nuevas cadenas agregadas -->
+    <string name="protein">Protein</string>
+    <string name="carbs">Carbs</string>
+    <string name="fats">Fats</string>
+    <string name="kcal_progress">Calories</string>
+
+    <!-- Cadenas faltantes para botones -->
+    <string name="go_to_workout">Go to Workout</string>
+    <string name="view_diet_plan">View Diet Plan</string>
+    <string name="exit_button">Exit</string>
+    <string name="profile_background">Profile Background</string>
+    <string name="motivation">Remember that it’s okay to fail one day! What matters is to keep going.</string>
+    <string name="age">Age</string>
+    <string name="height">Height</string>
+    <string name="weight">Weight</string>
+    <string name="member">Member</string>
+
+    <string name="low">Low</string>
+    <string name="moderate">Moderate</string>
+    <string name="high">High</string>
+
+    <string name="add_food">Add food</string>
+
+
+
+
+
+
+
+
+</resources>
