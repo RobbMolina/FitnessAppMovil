@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">My App</string>
+    <string name="app_name">GoalFit</string>
     <string name="profile">Profile</string>
     <string name="load_exercises">Load Exercises</string>
     <string name="muscle_group">Muscle group: %1$s</string>
@@ -53,6 +53,9 @@
 
     <string name="add_food">Add food</string>
 
+    <string name="app_subtitle">Empowering your progress</string>
+    <string name="forgot_password">Forgot your password?</string>
+    <string name="no_account_link">Create one here.</string>
 
 
 

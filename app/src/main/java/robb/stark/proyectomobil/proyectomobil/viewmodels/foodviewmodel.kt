@@ -1,113 +1,132 @@
 package robb.stark.proyectomobil.proyectomobil.viewmodels
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import robb.stark.proyectomobil.proyectomobil.models.food
-import androidx.compose.material3.CardDefaults
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import robb.stark.proyectomobil.R
-import robb.stark.proyectomobil.proyectomobil.models.Preferencias
-import robb.stark.proyectomobil.proyectomobil.models.Preferencias.Companion.CONTCARBS
-import robb.stark.proyectomobil.proyectomobil.models.Preferencias.Companion.CONTGRASAS
-import robb.stark.proyectomobil.proyectomobil.models.Preferencias.Companion.CONTKCAL
-import robb.stark.proyectomobil.proyectomobil.models.Preferencias.Companion.CONTPROTE
-import robb.stark.proyectomobil.proyectomobil.models.Preferencias.Companion.dataStore
+import robb.stark.proyectomobil.proyectomobil.data.AuthRepository
+import robb.stark.proyectomobil.proyectomobil.data.UserRepository
+import robb.stark.proyectomobil.proyectomobil.models.food
+import robb.stark.proyectomobil.proyectomobil.views.AppColors
 
 @Composable
 fun FoodCard(foodItem: food, navController: NavController) {
 
-    val context = LocalContext.current
-    val prefs = Preferencias(context)
+    val authRepository = remember { AuthRepository() }
+    val userRepository = remember { UserRepository() }
     val coroutine = rememberCoroutineScope()
 
     Card(
         modifier = Modifier
-            .fillMaxWidth()
-            .padding(8.dp),
-        shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFFEBE4FF))
+            .fillMaxWidth(),
+        shape = RoundedCornerShape(20.dp),
+        colors = CardDefaults.cardColors(containerColor = AppColors.CardBg),
+        elevation = CardDefaults.cardElevation(defaultElevation = 3.dp)
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(10.dp),
-            horizontalArrangement = Arrangement.spacedBy(16.dp),
+                .padding(12.dp),
+            horizontalArrangement = Arrangement.spacedBy(14.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Image(painter = painterResource(id = foodItem.img),
-                contentDescription = "",
-                modifier = Modifier.size(120.dp),
-                contentScale = ContentScale.Fit)
+            Image(
+                painter = painterResource(id = foodItem.img),
+                contentDescription = foodItem.nombre,
+                modifier = Modifier
+                    .size(90.dp)
+                    .clip(RoundedCornerShape(16.dp))
+                    .background(AppColors.InputBg),
+                contentScale = ContentScale.Crop
+            )
+
             Column(
+                modifier = Modifier.weight(1f),
                 verticalArrangement = Arrangement.spacedBy(4.dp)
             ) {
                 Text(
                     text = foodItem.nombre,
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight.Bold
+                    fontSize = 17.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = AppColors.Morado
                 )
                 Text(
                     text = foodItem.descripcion ?: "Sin descripción",
-                    fontSize = 14.sp
+                    fontSize = 13.sp,
+                    color = AppColors.TextoSecundario,
+                    maxLines = 2
                 )
 
+                Spacer(Modifier.height(2.dp))
                 Text(
-                    text = "KCal: ${foodItem.cals} kcal, Proteínas: ${foodItem.protein} g, Carbs: ${foodItem.carbs} g, Grasas: ${foodItem.fat} g ",
-                    fontSize = 12.sp
+                    text = "${foodItem.cals.toInt()} kcal  ·  P ${foodItem.protein.toInt()}g  ·  C ${foodItem.carbs.toInt()}g  ·  G ${foodItem.fat.toInt()}g",
+                    fontSize = 12.sp,
+                    fontWeight = FontWeight.Medium,
+                    color = AppColors.Violeta
                 )
+
+                Spacer(Modifier.height(6.dp))
                 Button(
                     onClick = {
-                        coroutine.launch {
-                            val preferencias = context.dataStore.data.first()
+                        val uid = authRepository.currentUid ?: return@Button
 
-                            val currentKcal = preferencias[CONTKCAL] ?: 0f
-                            val currentProtein = preferencias[CONTPROTE] ?: 0f
-                            val currentFat = preferencias[CONTGRASAS] ?: 0f
-                            val currentCarbs = preferencias[CONTCARBS] ?: 0f
+                        coroutine.launch {
+                            val profile = userRepository.observeUserProfile(uid).first()
+
+                            val currentKcal = profile?.contkcal ?: 0f
+                            val currentProtein = profile?.contprote ?: 0f
+                            val currentFat = profile?.contgrasas ?: 0f
+                            val currentCarbs = profile?.contcarbs ?: 0f
 
                             val updatedKcal = currentKcal + foodItem.cals
                             val updatedProtein = currentProtein + foodItem.protein
                             val updatedFat = currentFat + foodItem.fat
                             val updatedCarbs = currentCarbs + foodItem.carbs
 
-                            prefs.refreshProgress(
-                                contkcal = updatedKcal.toDouble(),
+                            userRepository.updateProgress(
+                                uid = uid,
+                                contkcal = updatedKcal,
                                 contprote = updatedProtein,
                                 contgrasas = updatedFat,
-                                contcarbs = updatedCarbs.toDouble()
+                                contcarbs = updatedCarbs
                             )
+
+                            navController.navigate("home")
                         }
-                        navController.navigate("home")
-                    }
-                    ,
+                    },
                     shape = RoundedCornerShape(12.dp),
-                    contentPadding = PaddingValues(8.dp),
+                    contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = Color(0xFF41337A)
+                        containerColor = AppColors.Violeta,
+                        contentColor = Color.White
                     )
                 ) {
                     Text(
                         text = stringResource(id = R.string.add_food),
-                        fontWeight = FontWeight.Normal
+                        fontSize = 13.sp,
+                        fontWeight = FontWeight.SemiBold
                     )
                 }
             }

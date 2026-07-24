@@ -12,6 +12,7 @@ import robb.stark.proyectomobil.proyectomobil.views.Home
 import robb.stark.proyectomobil.proyectomobil.views.LoginView
 import robb.stark.proyectomobil.proyectomobil.views.Perfil
 import robb.stark.proyectomobil.proyectomobil.views.Plan
+import robb.stark.proyectomobil.proyectomobil.views.RegistroView
 import robb.stark.proyectomobil.proyectomobil.views.Rutina
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -23,27 +24,21 @@ fun NavigationManager(){
         composable(route= "Inicio"){
             LoginView(navController)
         }
-
-
         composable(route = "Home", arguments = listOf()) {
             Home(navController)
         }
-
         composable(route = "Perfil", arguments = listOf()) {
             Perfil(navController)
         }
-
         composable(route= "calculadora"){
             Calculadora(navController)
         }
-
         composable(route= "plan"){
             Plan(navController)
         }
-
-
         composable(route= "Rutina"){
             Rutina(navController, EjercicioViewModel())
         }
+        composable("registro") { RegistroView(navController) }
     }
 }
